@@ -28,12 +28,10 @@ function JoblyApp() {
 
   console.log("inside JoblyApp");
 
-  const clientId = '562112205129-boi52pl767qigdrri7o53ubvbfi8jcuf.apps.googleusercontent.com';
-
   useEffect(() => {
     const initClient = () => {
           gapi.client.init({
-          clientId: clientId,
+          clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
           scope: '',
           prompt: 'select_account',
         });
@@ -83,9 +81,9 @@ function JoblyApp() {
     setUser(initialLoad);
   }
 
-  async function loginGoogle(user){
+  async function loginGoogle(googleToken){
     console.log("loginGoogle successful");
-    const token = await JoblyApi.loginGoogle(user);
+    const token = await JoblyApi.loginGoogle(googleToken);
     setToken(token);
     setUser(initialLoad);
   }
