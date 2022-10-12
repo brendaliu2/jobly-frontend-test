@@ -83,9 +83,11 @@ function JoblyApp() {
     setUser(initialLoad);
   }
 
-  function loginGoogle(token, user){
+  async function loginGoogle(user){
+    console.log("loginGoogle successful");
+    const token = await JoblyApi.loginGoogle(user);
     setToken(token);
-    setUser(user);
+    setUser(initialLoad);
   }
 
   async function update(formData) {

@@ -74,7 +74,8 @@ function LoginForm({ login, loginGoogle }) {
       lastName: res.profileObj.familyName,
       email: res.profileObj.email
     };
-    //api call
+
+    loginGoogle(user);
   };
 
   const onFailure = (err) => {

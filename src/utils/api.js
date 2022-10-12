@@ -75,6 +75,12 @@ class JoblyApi {
     return res.token;
   }
 
+  /** Logins user with Google. */
+  static async loginGoogle(data) {
+    let res = await this.request(`auth/googleUser`, data, "post");
+    return res.token;
+  }
+
   /** Update user information. */
 
   static async update(username, data) {

@@ -15,7 +15,7 @@ import userContext from './Context/userContext';
  *  {username, firstName, lastName, email, isAdmin, applications:[]}
 */
 
-function RoutesList({ signup, login, update }) {
+function RoutesList({ signup, login, update, loginGoogle }) {
   const { user } = useContext(userContext);
 
   return (
@@ -35,7 +35,7 @@ function RoutesList({ signup, login, update }) {
         }
 
         <Route path='/signup' element={<SignupForm signup={signup} />} />
-        <Route path='/login' element={<LoginForm login={login} />} />
+        <Route path='/login' element={<LoginForm login={login} loginGoogle={loginGoogle}/>} />
       </Routes>
 
     </div>
