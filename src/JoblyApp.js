@@ -6,6 +6,7 @@ import RoutesList from './RoutesList';
 import userContext from './Context/userContext';
 import jwt from 'jwt-decode';
 import Loading from './Loading';
+import { gapi } from 'gapi-script';
 
 const initialLoad = {
   isLoading: true,
@@ -26,6 +27,20 @@ function JoblyApp() {
   const [user, setUser] = useState(initialLoad);
 
   console.log("inside JoblyApp");
+
+  const clientId = '562112205129-boi52pl767qigdrri7o53ubvbfi8jcuf.apps.googleusercontent.com';
+
+  useEffect(() => {
+    const initClient = () => {
+          gapi.client.init({
+          clientId: clientId,
+          scope: '',
+          prompt: 'select_account',
+        });
+      };
+      gapi.load('client:auth2', initClient);
+  });
+
   useEffect(function getUserInfoAndSetLocalStorage() {
     console.log("inside JoblyApp useEffect");
 

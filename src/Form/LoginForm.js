@@ -46,21 +46,40 @@ function LoginForm({ login, loginGoogle }) {
     }
   }
 
-  const handleLogin = async googleData => {
-    const res = await fetch("/api/v1/auth/google", {
-      method: "POST",
-      body: JSON.stringify({
-        token: googleData.tokenId
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    const data = await res.json();
-    // store returned user somehow
-    console.log('data', data);
-    // loginGoogle()
+  // const handleLogin = async googleData => {
+  //   const res = await fetch("https://jobly-backend-test.herokuapp.com/api/v1/auth/google", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       token: googleData.tokenId
+  //     }),
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   });
+  //   const data = await res.json();
+  //   // store returned user somehow
+  //   console.log('data', data);
+  //   // loginGoogle()
+  // };
+
+  const onSuccess = (res) => {
+    console.log(res.profileObj);
+    //check if email is in db
+    //if yes,
+      //login without password
+    const user = {
+      username: res.profileObj.email,
+      password: res.profileObj.googleId,
+      firstName: res.profileObj.givenName,
+      lastName: res.profileObj.familyName,
+      email: res.profileObj.email
+    };
+    //api call
   };
+
+  const onFailure = (err) => {
+    console.log('failed', err);
+};
 
   return (
     <>
@@ -109,8 +128,8 @@ function LoginForm({ login, loginGoogle }) {
       <GoogleLogin
         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
         buttonText="Log in with Google"
-        onSuccess={handleLogin}
-        onFailure={handleLogin}
+        onSuccess={onSuccess}
+        onFailure={onFailure}
         cookiePolicy={'single_host_origin'}
       />
     </>
